@@ -1,0 +1,27 @@
+name: .NET_Sample
+
+on:
+  schedule:
+    - cron: '* * 8 * *'
+  push:
+    branches: [ master ]
+  workflow_dispatch: # Run workflow manually (without waiting for the cron to be called), through the Github Actions Workflow page directly
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: RUN
+      env:
+        ConsumerKey: ${{ secrets.CONSUMERKEY }}
+        ConsumerSecret: ${{ secrets.CONSUMERSECRET }}
+        AccessToken: ${{ secrets.ACCESSTOKEN }}
+        AccessTokenSecret: ${{ secrets.ACCESSTOKENSECRET }}
+      run: dotnet run --no-restore  --project FireTweet
