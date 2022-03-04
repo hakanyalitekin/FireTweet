@@ -24,4 +24,4 @@ jobs:
         ConsumerSecret: ${{ secrets.CONSUMERSECRET }}
         AccessToken: ${{ secrets.ACCESSTOKEN }}
         AccessTokenSecret: ${{ secrets.ACCESSTOKENSECRET }}
-      run: dotnet run --no-restore  --project ActionTweet
+      run: dotnet run --no-restore  --project FireTweet
